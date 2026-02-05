@@ -86,9 +86,9 @@ if comparar:
                 col1, col2 = st.columns(2)
 
                 with col1:
-                    st.markdown(">## **Saíram no Mês Anterior:**")
-                    st.markdown( f"<h2 style='color:red;'>{len(unicos_anterior)}</h3>", unsafe_allow_html=True)
-                    st.dataframe(unicos_anterior)
+                    st.subheader("Saídas do Mês")
+                    st.metric("Total", len(unicos_anterior))
+                    st.dataframe(unicos_anterior, use_container_width=True)
 
                     csv1 = unicos_anterior.to_csv(index=False).encode("utf-8")
                     st.download_button(
@@ -96,12 +96,13 @@ if comparar:
                         data=csv1,
                         file_name="sairam_mes_anterior.csv",
                         mime="text/csv",
+                        key="dl_anterior"
                     )
 
                 with col2:
-                    st.markdown(">## **Entraram no Mês Atual:**")
-                    st.markdown( f"<h2 style='color:green;'>{len(unicos_atual)}</h3>", unsafe_allow_html=True)
-                    st.dataframe(unicos_atual)
+                    st.subheader("Entradas do Mês")
+                    st.metric("Total", len(unicos_atual))
+                    st.dataframe(unicos_atual, use_container_width=True)
 
                     csv2 = unicos_atual.to_csv(index=False).encode("utf-8")
                     st.download_button(
@@ -109,4 +110,5 @@ if comparar:
                         data=csv2,
                         file_name="entraram_mes_atual.csv",
                         mime="text/csv",
+                        key="dl_atual"
                     )
